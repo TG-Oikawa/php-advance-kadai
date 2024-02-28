@@ -71,14 +71,14 @@ try {
     }
 
     // booksテーブルからbook_codeカラムのデータを取得するためのSQL文を変数$sql_select_book_codesに代入する
-    $sql_select_book_codes = 'SELECT book_code FROM books';
+    $sql_select_genre_codes = 'SELECT genre_code FROM books';
 
     // SQL文を実行する
-    $sql_select_book_codes = $pdo->query($sql_select_book_codes);
+    $sql_select_genre_codes = $pdo->query($sql_select_genre_codes);
 
     // SQL文の実行結果を配列で取得する
     // 補足：PDO::FETCH_COLUMNは1つのカラムの値を1次元配列（多次元ではない普通の配列）で取得する設定である
-    $book_codes = $sql_select_book_codes->fetchAll(PDO::FETCH_COLUMN);
+    $genre_codes = $sql_select_genre_codes->fetchAll(PDO::FETCH_COLUMN);
 } catch (PDOException $e) {
     exit($e->getMessage());
 }
@@ -130,10 +130,10 @@ try {
                         <option disabled selected value>選択してください</option>
                         <?php
                         // 配列の中身を順番に取り出し、セレクトボックスの選択肢として出力する
-                        foreach ($book_codes as $book_code) {
+                        foreach ($genre_codes as $genre_code) {
                             // もし変数$book_codeが商品の仕入先コードの値と一致していれば、selected属性をつけて初期値にする
-                            if ($book_code === $book['book_code']) {
-                                echo "<option value='{$book_code}' selected>{$book_code}</option>"; 
+                            if ($genre_code === $book['genre_code']) {
+                                echo "<option value='{$genre_code}' selected>{$genre_code}</option>"; 
                              }
                         }
                         ?>
