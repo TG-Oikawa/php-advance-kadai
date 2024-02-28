@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
             book_name = :book_name,
             price = :price,
             stock_quantity = :stock_quantity,
-            book_code = :book_code
+            genre_code = :genre_code
             WHERE id = :id
         ';
         $stmt_update = $pdo->prepare($sql_update);
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
         $stmt_update->bindValue(':book_name', $_POST['book_name'], PDO::PARAM_STR);
         $stmt_update->bindValue(':price', $_POST['price'], PDO::PARAM_INT);
         $stmt_update->bindValue(':stock_quantity', $_POST['stock_quantity'], PDO::PARAM_INT);
-        $stmt_update->bindValue(':book_code', $_POST['book_code'], PDO::PARAM_INT);
+        $stmt_update->bindValue(':genre_code', $_POST['genre_code'], PDO::PARAM_INT);
         $stmt_update->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 
         // SQL文を実行する
@@ -125,8 +125,8 @@ try {
                     <label for="stock_quantity">在庫数</label>
                     <input type="number" name="stock_quantity" value="<?= $book['stock_quantity'] ?>" min="0" max="100000000" required>
  
-                    <label for="book_code">書籍コード</label>
-                    <select name="book_code" required>
+                    <label for="genre_code">ジャンルコード</label>
+                    <select name="genre_code" required>
                         <option disabled selected value>選択してください</option>
                         <?php
                         // 配列の中身を順番に取り出し、セレクトボックスの選択肢として出力する
